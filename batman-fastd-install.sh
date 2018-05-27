@@ -41,6 +41,10 @@ apt install apt-transport-https
 apt update
 apt install build-essential bridge-utils pkg-config libnl-3-dev libnl-genl-3-dev fastd
 
+# Für alfred benötigte Entwicklunsgbibliotheken
+
+apt install libnl-3-dev libnl-genl-3-dev libcap-dev libgps-dev
+
 # Jetzt wird B.A.T.M.A.N. alfred aus den Quellen geladen und installiert
 
 cd /tmp
