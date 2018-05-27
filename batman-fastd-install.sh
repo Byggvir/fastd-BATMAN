@@ -8,8 +8,22 @@ VBAT="2018.1"
 
 # Installation der linux-headers für den Kernel.
 
-# apt install linux-headers-$(uname -r | sed 's#-amd64#-all-amd64#')
-apt install raspberrypi-kernel-headers
+MACHINE=$(uname -m)
+
+case "$MACHINE" in
+
+ x86_64) 
+    apt install linux-headers-amd64 	# Debian
+    ;;
+ armv7l)
+    apt install raspberrypi-kernel-headers  # Raspian
+    ;;
+ *)
+ echo -e "Unbekannte Architektur ${MACHINE}"
+ exit 1
+ ;;
+ 
+esac
 
 # Wir brauchen ein paar Repos, die nicht im Default einhalten sind.
 
@@ -25,7 +39,7 @@ gpg -a --export $KEY | apt-key add -
 
 apt install apt-transport-https
 apt update
-apt install build-essential bridge-utils pkg-config libnl-3-dev libnl-genl-3-dev linux-headers-4.14.30-v7+ fastd
+apt install build-essential bridge-utils pkg-config libnl-3-dev libnl-genl-3-dev fastd
 
 # Jetzt wird B.A.T.M.A.N. batctl aus den Quellen geladen und installiert
 
